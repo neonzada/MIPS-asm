@@ -1,18 +1,18 @@
 .macro PRINTSTR(%s)
-	li $v0, 4
-	la $a0, %s
-	syscall
+  li $v0, 4
+  la $a0, %s
+  syscall
 .end_macro
 
 .macro READFLOAT(%f)
-	li $v0, 6
+  li $v0, 6
   syscall
   mov.s %f, $f0
 .end_macro
 
 .data
   greet:          .asciiz "Escolha a forma geométrica (0: Sair, 1: Circunferência, 2: Triângulo, 3: Retângulo): "
-  invalid:				.asciiz "Escolha invalida!"
+  invalid:	  .asciiz "Escolha invalida!"
   prompt_raio:    .asciiz "Digite o raio da circunferência: "
   prompt_base:    .asciiz "Digite a base: "
   prompt_altura:  .asciiz "Digite a altura: "
@@ -30,13 +30,13 @@ main:
   move $t0, $v0
 
 try:
-	beq $t0, 0, done
+  beq $t0, 0, done
   beq $t0, 1, circle
   beq $t0, 2, triangle
   beq $t0, 3, rectangle
 	
-	PRINTSTR(invalid)
-	j try
+  PRINTSTR(invalid)
+  j try
 	
   j done #failsafe, just to be sure
 
